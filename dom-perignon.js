@@ -39,7 +39,34 @@ define(function() {
     return doc;
   }
 
-  Parser.document = false;
+  Parser.document = (function() {
+    if(!window.XMLHttpRequest) {
+      return false;
+    }
+
+    function check(xhr) {
+      try {
+        var el = xhr.responseXML.body;
+        if(el && (el.firstChild.nodeType === 3 || el.firstChild.nodeType === 1)) {
+          Parser.document = true;
+        } else {
+          Parser.document = false;
+        }
+      } catch(e) {
+        Parser.document = false;
+      }
+    }
+
+    var xhr = new window.XMLHttpRequest();
+    xhr.open("GET", window.location.href, true);
+    xhr.responseType = "document";
+    xhr.onreadystatechange = function() {
+      if(this.readyState === 4) {
+        check(xhr);
+      }
+    };
+    xhr.send();
+  })();
 
   return Parser;
 });

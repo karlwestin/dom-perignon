@@ -1,8 +1,14 @@
 
 // todo: polyfill for Object.keys
-var tests = Object.keys(window.__karma__.files).filter(function (file) {
-  return /tests\.js/.test(file);
-});
+var tests = [];
+var files = window.__karma__.files;
+for(var file in files) {
+  if(files.hasOwnProperty(file)) {
+    if(/tests\.js/.test(file)) {
+      tests.push(file);
+    }
+  }
+}
 
 require.config({
   baseUrl: "/base",
@@ -10,9 +16,8 @@ require.config({
   deps: tests,
 
   callback: function() {
-    window.expect = chai.expect;
     mocha.setup({
-      globals: ["expect"]
+      globals: ["assert"]
     });
     window.__karma__.start();
   }

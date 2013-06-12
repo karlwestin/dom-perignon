@@ -42,16 +42,19 @@ define([
 
   function standardTests(doc, done) {
     var els = doc.querySelectorAll("[data-qa=test-elements]");
-    expect(els[0].nodeName).to.equal("IMG");
-    expect(els[1].nodeName).to.equal("P");
-    expect(els[1].firstChild.nodeType).to.equal(3);
+    assert(els[0].nodeName, "IMG");
+    assert(els[1].nodeName, "P");
+    assert(els[1].firstChild.nodeType, 3);
 
     done();
   }
 
-  it("should determine whether the XHR DOM parser can be used for HTML", function() {
-    expect(DOM.document).to.be.defined;
-    dump("Document parsing in this browser: ", DOM.document);
+  it("should determine whether the XHR DOM parser can be used for HTML", function(done) {
+    setTimeout(function() {
+      assert(typeof DOM.document != "undefined", true);
+      dump("Document parsing in this browser: ", DOM.document);
+      done();
+    }, 100);
   });
 
   it("should parse a string", function(done) {

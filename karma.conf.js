@@ -8,7 +8,7 @@ basePath = '';
 
 // list of files / patterns to load in the browser
 files = [
-  'test/chai.js',
+  'test/mychai.js',
   MOCHA,
   MOCHA_ADAPTER,
   REQUIRE,
