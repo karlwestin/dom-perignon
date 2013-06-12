@@ -29,3 +29,14 @@ define(["dom-perignon"], function(Parse) {
   }
 });
 ```
+
+###Compatibility
+
+Known to work in (as in tested in):
+* IE8+ 
+* Safari 5+  
+* Chrome 27
+* Firefox 21
+* Opera 11.62
+
+it probably works in earlier versions as well, please file issues if not
